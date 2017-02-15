@@ -1,0 +1,210 @@
+<?php
+function _alps_helper_installed_fields() {
+
+	$field_bases = array();
+
+	// Exported field_base: 'field_header_image'.
+	$field_bases['field_header_image'] = array(
+		'active' => 1,
+		'cardinality' => 1,
+		'deleted' => 0,
+		'entity_types' => array(),
+		'field_name' => 'field_header_image',
+		'indexes' => array(
+			'fid' => array(
+				0 => 'fid',
+			),
+		),
+		'locked' => 0,
+		'module' => 'image',
+		'settings' => array(
+			'default_image' => 0,
+			'uri_scheme' => 'public',
+		),
+		'translatable' => 0,
+		'type' => 'image',
+	);
+
+	// Exported field_base: 'field_sub_title'.
+	$field_bases['field_sub_title'] = array(
+		'active' => 1,
+		'cardinality' => 1,
+		'deleted' => 0,
+		'entity_types' => array(),
+		'field_name' => 'field_sub_title',
+		'indexes' => array(
+			'format' => array(
+				0 => 'format',
+			),
+		),
+		'locked' => 0,
+		'module' => 'text',
+		'settings' => array(
+			'max_length' => 255,
+		),
+		'translatable' => 0,
+		'type' => 'text',
+	);
+
+	return $field_bases;
+}
+
+function _alps_helper_installed_instances() {
+	$field_instances = array();
+	$field_instances['field_header_image'] = array(
+		'deleted' => 0,
+		'description' => '',
+		'display' => array(
+			'default' => array(
+				'label' => 'above',
+				'module' => 'image',
+				'settings' => array(
+					'image_link' => '',
+					'image_style' => '',
+				),
+				'type' => 'image',
+				'weight' => 3,
+			),
+			'teaser' => array(
+				'label' => 'above',
+				'settings' => array(),
+				'type' => 'hidden',
+				'weight' => 0,
+			),
+		),
+		'entity_type' => 'node',
+		'field_name' => 'field_header_image',
+		'label' => 'Header Image',
+		'required' => 0,
+		'settings' => array(
+			'alt_field' => 0,
+			'default_image' => 0,
+			'file_directory' => '',
+			'file_extensions' => 'png gif jpg jpeg',
+			'max_filesize' => '',
+			'max_resolution' => '',
+			'min_resolution' => '',
+			'title_field' => 1,
+			'user_register_form' => FALSE,
+		),
+		'widget' => array(
+			'active' => 1,
+			'module' => 'image',
+			'settings' => array(
+				'preview_image_style' => 'thumbnail',
+				'progress_indicator' => 'throbber',
+			),
+			'type' => 'image_image',
+			'weight' => -4,
+		),
+	);
+
+	// Exported field_instance: 'node-page-field_sub_title'.
+	$field_instances['field_sub_title'] = array(
+		'default_value' => NULL,
+		'deleted' => 0,
+		'description' => '',
+		'display' => array(
+			'default' => array(
+				'label' => 'above',
+				'module' => 'text',
+				'settings' => array(),
+				'type' => 'text_default',
+				'weight' => 1,
+			),
+			'teaser' => array(
+				'label' => 'above',
+				'settings' => array(),
+				'type' => 'hidden',
+				'weight' => 0,
+			),
+		),
+		'entity_type' => 'node',
+		'field_name' => 'field_sub_title',
+		'label' => 'Sub Title',
+		'required' => 0,
+		'settings' => array(
+			'text_processing' => 0,
+			'user_register_form' => FALSE,
+		),
+		'widget' => array(
+			'active' => 1,
+			'module' => 'text',
+			'settings' => array(
+				'size' => 60,
+			),
+			'type' => 'text_textfield',
+			'weight' => -4,
+		),
+	);
+
+	// Translatables
+	// Included for use with string extractors like potx.
+	t('Header Image');
+	t('Sub Title');
+
+	return $field_instances;
+}
+
+function _does_field_exist($field_name) {
+	$prior_field = field_read_field($field_name, array('include_inactive' => TRUE));
+	return !empty($prior_field);
+}
+
+function _does_field_instance_exist($field_name, $bundle) {
+	$prior_instance = field_read_instance('node', $field_name, $bundle);
+	return !empty($prior_instance);
+}
+
+function _add_custom_fields() {
+	$fields_to_skip = array();
+	foreach (_alps_helper_installed_fields() as $field) {
+		if (!_does_field_exist($field['field_name'])) {
+			field_create_field($field);
+		}
+	}
+	foreach (array('page', 'article') as $key => $bundle) {
+		foreach (_alps_helper_installed_instances() as $fieldinstance) {
+			if (!_does_field_instance_exist($field['field_name'], $bundle)) {
+				$fieldinstance['entity_type'] = 'node';
+				$fieldinstance['bundle'] = $bundle;
+				print_r($fieldinstance);
+				field_create_instance($fieldinstance);
+			} else {
+				print "Field already exists {$field['field_name']}!\n";
+			}
+		}
+	}
+}
+
+function _delete_custom_fields() {
+	foreach (array_keys(_alps_helper_installed_fields()) as $field) {
+		field_delete_field($field);
+	}
+	foreach (array('page', 'article') as $key => $bundle) {
+		$instances = field_info_instances('node', $bundle);
+		foreach ($instances as $instance_name => $fieldinstance) {
+			if (_is_field_instance_a_custom_field($fieldinstance, $bundle)) {
+				field_delete_instance($fieldinstance);
+			}
+		}
+	}
+}
+
+function _is_field_instance_a_custom_field($fieldinstance, $bundle) {
+	foreach (array_keys(_alps_helper_installed_fields()) as $field) {
+		if ($fieldinstance == field_info_instance('node', $field, $bundle)) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+function alps_helper_install() {
+	_add_custom_fields();
+}
+
+function alps_helper_uninstall() {
+	_delete_custom_fields();
+	field_purge_batch(500);
+}
