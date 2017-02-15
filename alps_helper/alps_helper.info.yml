@@ -1,0 +1,18 @@
+name: 'ALPS Helper'
+description: 'Provides fields for Basic Page and Article as well as views.'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - comment
+  - field
+  - file
+  - image
+  - node
+  - path
+  - rdf
+  - system
+  - text
+  - user
+  - views
+  - alps_helper_base

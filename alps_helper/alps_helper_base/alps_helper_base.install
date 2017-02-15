@@ -1,0 +1,19 @@
+<?php
+
+function alps_helper_base_install() {
+	$configs = array(
+		'field.field.node.article.field_header_image',
+		'field.field.node.article.field_sub_title',
+		'field.field.node.page.field_header_image',
+		'field.field.node.page.field_sub_title',
+		'field.storage.node.field_header_image',
+		'field.storage.node.field_sub_title',
+		'image.style.med_square',
+		'views.view.carousel',
+		'views.view.news',
+		'views.view.story',
+	);
+	foreach ($configs as $key => $config) {
+		\Drupal::configFactory()->getEditable($config)->delete();
+	}
+}

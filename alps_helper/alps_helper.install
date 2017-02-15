@@ -1,0 +1,49 @@
+<?php
+
+function alps_helper_install() {
+	// enable custom fields in form display
+	\Drupal::entityTypeManager()
+		->getStorage('entity_form_display')
+		->load('node.article.default')
+			->setComponent('field_header_image', array(
+				'type' => 'image_image',
+				'weight' => 2
+			))
+			->setComponent('field_sub_title', array(
+				'type' => 'string_textfield',
+				'weight' => 1
+			))
+		->save();
+
+	// enable custom fields in form display
+	\Drupal::entityTypeManager()
+		->getStorage('entity_form_display')
+		->load('node.page.default')
+			->setComponent('field_header_image', array(
+				'type' => 'image_image',
+				'weight' => 2
+			))
+			->setComponent('field_sub_title', array(
+				'type' => 'string_textfield',
+				'weight' => 1
+			))
+		->save();
+}
+
+function alps_helper_uninstall() {
+	$configs = array(
+		'field.field.node.article.field_header_image',
+		'field.field.node.article.field_sub_title',
+		'field.field.node.page.field_header_image',
+		'field.field.node.page.field_sub_title',
+		'field.storage.node.field_header_image',
+		'field.storage.node.field_sub_title',
+		'image.style.med_square',
+		'views.view.carousel',
+		'views.view.news',
+		'views.view.story',
+	);
+	foreach ($configs as $key => $config) {
+		\Drupal::configFactory()->getEditable($config)->delete();
+	}
+}

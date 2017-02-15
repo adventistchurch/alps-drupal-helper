@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: med_square
+label: 'Med Square'
+effects:
+  0e072302-94ed-4a0d-adab-d2455086d799:
+    uuid: 0e072302-94ed-4a0d-adab-d2455086d799
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 200
+      height: 200
