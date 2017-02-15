@@ -9,3 +9,13 @@ A helper module for the ALPS Drupal theme.
   * **Drush** Type `drush en alps_helper` and follow the prompt to enable.
 
 That's it. Once you've enabled the module you will have additional fields and views to properly utitlize the ALPS Theme.
+
+## Custom Fields
+This module creates the following custom fields and attaches them to the `Article` and `Basic Page` content types.
+- Header Image
+- Sub Title
+
+## Custom Views
+- Homepage Carousel
+- News list and news grid
+- Story
