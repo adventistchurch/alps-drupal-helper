@@ -7,9 +7,10 @@ A helper module for the ALPS Drupal theme.
   * sites > all > modules > alps_helper
 - Enable the module in the Admin or with the command line tool Drush.
   * **Admin**
-    * You must download the [views drupal 7](https://www.drupal.org/project/views) module **and any of its dependencies**.
+    * You must download the [views (for drupal 7)](https://www.drupal.org/project/views) module **and any of its dependencies**.
+    * You must download the [jQuery Update](https://www.drupal.org/project/jquery_update) module **and any of its dependencies**.
     * Go to admin > modules
-    * Check `alps_helper`, `Chaos tools`, `Views`, and `Views UI`
+    * Check `alps_helper`, `jQuery Update`, `Chaos tools`, `Views`, and `Views UI`
     * Click `Save configuration`.
   * **Drush** Type `drush en alps_helper` and follow the prompt to enable (there are a few dependenceies that will be downloaded and enabled).
 
