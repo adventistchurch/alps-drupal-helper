@@ -1,6 +1,6 @@
 <?php
 
-function alps_helper_base_install() {
+function alps_drupal_helper_base_install() {
 	$configs = array(
 		'field.field.node.article.field_header_image',
 		'field.field.node.article.field_sub_title',

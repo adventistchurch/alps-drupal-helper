@@ -1,6 +1,6 @@
 <?php
 
-function alps_helper_install() {
+function alps_drupal_helper_install() {
 	// enable custom fields in form display
 	\Drupal::entityTypeManager()
 		->getStorage('entity_form_display')
@@ -30,7 +30,7 @@ function alps_helper_install() {
 		->save();
 }
 
-function alps_helper_uninstall() {
+function alps_drupal_helper_uninstall() {
 	$configs = array(
 		'field.field.node.article.field_header_image',
 		'field.field.node.article.field_sub_title',

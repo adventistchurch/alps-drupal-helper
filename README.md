@@ -3,10 +3,10 @@ A helper module for the ALPS Drupal theme.
 
 ## Installation
 - Download the contents of this repository.
-- Place the folder `alps_helper` within the `modules` directory in the root of your drupal installation.
+- Place the folder `alps_drupal_helper` within the `modules` directory in the root of your drupal installation.
 - Enable the module in the Admin or with the command line tool Drush.
   * **Admin** Go to extends > check `Alps Helper` and `Alps Helper Base` > click install.
-  * **Drush** Type `drush en alps_helper` and follow the prompt to enable.
+  * **Drush** Type `drush en alps_drupal_helper` and follow the prompt to enable.
 
 That's it. Once you've enabled the module you will have additional fields and views to properly utitlize the ALPS Theme.
 
