@@ -1,5 +1,5 @@
 <?php
-function _alps_helper_installed_fields() {
+function _alps_drupal_helper_installed_fields() {
 
 	$field_bases = array();
 
@@ -49,7 +49,7 @@ function _alps_helper_installed_fields() {
 	return $field_bases;
 }
 
-function _alps_helper_installed_instances() {
+function _alps_drupal_helper_installed_instances() {
 	$field_instances = array();
 	$field_instances['field_header_image'] = array(
 		'deleted' => 0,
@@ -158,13 +158,13 @@ function _does_field_instance_exist($field_name, $bundle) {
 
 function _add_custom_fields() {
 	$fields_to_skip = array();
-	foreach (_alps_helper_installed_fields() as $field) {
+	foreach (_alps_drupal_helper_installed_fields() as $field) {
 		if (!_does_field_exist($field['field_name'])) {
 			field_create_field($field);
 		}
 	}
 	foreach (array('page', 'article') as $key => $bundle) {
-		foreach (_alps_helper_installed_instances() as $fieldinstance) {
+		foreach (_alps_drupal_helper_installed_instances() as $fieldinstance) {
 			if (!_does_field_instance_exist($field['field_name'], $bundle)) {
 				$fieldinstance['entity_type'] = 'node';
 				$fieldinstance['bundle'] = $bundle;
@@ -178,7 +178,7 @@ function _add_custom_fields() {
 }
 
 function _delete_custom_fields() {
-	foreach (array_keys(_alps_helper_installed_fields()) as $field) {
+	foreach (array_keys(_alps_drupal_helper_installed_fields()) as $field) {
 		field_delete_field($field);
 	}
 	foreach (array('page', 'article') as $key => $bundle) {
@@ -192,7 +192,7 @@ function _delete_custom_fields() {
 }
 
 function _is_field_instance_a_custom_field($fieldinstance, $bundle) {
-	foreach (array_keys(_alps_helper_installed_fields()) as $field) {
+	foreach (array_keys(_alps_drupal_helper_installed_fields()) as $field) {
 		if ($fieldinstance == field_info_instance('node', $field, $bundle)) {
 			return TRUE;
 		}
@@ -200,11 +200,11 @@ function _is_field_instance_a_custom_field($fieldinstance, $bundle) {
 	return FALSE;
 }
 
-function alps_helper_install() {
+function alps_drupal_helper_install() {
 	_add_custom_fields();
 }
 
-function alps_helper_uninstall() {
+function alps_drupal_helper_uninstall() {
 	_delete_custom_fields();
 	field_purge_batch(500);
 }

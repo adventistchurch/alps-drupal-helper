@@ -1,13 +1,13 @@
-name = alps_helper
+name = alps_drupal_helper
 description = This is the helper module for the ALPS theme. It will install additional fields for the Basic Page and Article content type as well as default views such as a carousel, news feed and a grid layout in the ALPS theme.
 package = ALPS
 core = 7.x
 dependencies[] = jquery_update
 dependencies[] = views
 dependencies[] = views_ui
-files[] = alps_helper.install
-files[] = alps_helper.module
-files[] = alps_helper.views_default.inc
+files[] = alps_drupal_helper.install
+files[] = alps_drupal_helper.module
+files[] = alps_drupal_helper.views_default.inc
 files[] = views/alps_carousel.view.php
 files[] = views/alps_story.view.php
 files[] = views/alps_news.view.php
