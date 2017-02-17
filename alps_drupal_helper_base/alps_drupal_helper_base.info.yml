@@ -1,4 +1,4 @@
-name: 'ALPS Helper Base'
+name: 'ALPS Drupal Helper Base'
 description: 'This module installs some basic configuration that the Alps Helper module depends on.'
 type: module
 core: 8.x
