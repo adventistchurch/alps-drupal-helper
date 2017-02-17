@@ -1,4 +1,4 @@
-name: 'ALPS Helper'
+name: 'ALPS Drupal Helper'
 description: 'Provides fields for Basic Page and Article as well as views.'
 type: module
 core: 8.x
